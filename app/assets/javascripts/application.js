@@ -23,10 +23,22 @@ scroll_bottom = function() {
   }
 }
 
+submit_message = function() {
+  var enterKeyCode = 13
+  $('#message_body').on('keydown', function(e) {
+    if (e.keyCode == enterKeyCode) {
+      e.preventDefault();
+      $('button').click();
+      e.target.value = '';
+    }
+  });
+}
+
 $(document).on('turbolinks:load', function() {
   $('.ui.dropdown').dropdown();
   $('.message .close').on('click', function() {
     $(this).closest('.message').transition('fade');
   });
+  submit_message();
   scroll_bottom();
 })
